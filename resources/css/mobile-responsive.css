@@ -1,0 +1,375 @@
+/* =============================================
+   V-STORE — Mobile Responsive Styles
+   Tambahkan ke: resources/css/app.css
+   atau <link> di layout utama
+   ============================================= */
+
+/* ── NAVBAR ───────────────────────────────── */
+@media (max-width: 768px) {
+  /* Sembunyikan menu desktop, tampilkan hamburger */
+  nav .desktop-menu {
+    display: none;
+  }
+
+  nav .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  nav .hamburger-btn span {
+    width: 22px;
+    height: 2px;
+    background: #ccc;
+    border-radius: 2px;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  /* Mobile menu (tampil saat hamburger diklik) */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: #111;
+    border-top: 1px solid #222;
+    padding: 12px 0;
+  }
+
+  .mobile-menu.open {
+    display: flex;
+  }
+
+  .mobile-menu a {
+    padding: 12px 20px;
+    color: #ccc;
+    font-size: 15px;
+    border-bottom: 1px solid #1a1a1a;
+    text-decoration: none;
+  }
+
+  .mobile-menu a:hover {
+    color: #C9A84C;
+    background: #1a1a1a;
+  }
+
+  /* Tombol Masuk & Daftar di navbar */
+  .nav-auth-buttons {
+    display: none; /* sembunyikan di navbar, pindah ke mobile-menu */
+  }
+}
+
+/* ── HERO SECTION ─────────────────────────── */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 24px 20px;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .hero-title {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .hero-image-container {
+    width: 100%;
+    max-width: 100%;
+    order: -1; /* Gambar di atas teks */
+  }
+
+  .hero-image-container img {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    border-radius: 100px;
+  }
+
+  /* Stats row */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid #222;
+    margin-top: 16px;
+  }
+
+  .hero-stats .stat-item {
+    text-align: center;
+    padding: 14px 8px;
+    border-right: 1px solid #222;
+  }
+
+  .hero-stats .stat-item:last-child {
+    border-right: none;
+  }
+
+  .hero-stats .stat-number {
+    font-size: 22px;
+    color: #C9A84C;
+  }
+
+  .hero-stats .stat-label {
+    font-size: 11px;
+    color: #666;
+  }
+}
+
+/* ── BRAND TICKER ─────────────────────────── */
+@media (max-width: 768px) {
+  .brand-ticker {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .brand-ticker-inner {
+    display: inline-flex;
+    gap: 24px;
+    animation: ticker 12s linear infinite;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* ── KATEGORI ─────────────────────────────── */
+@media (max-width: 768px) {
+  .kategori-section {
+    padding: 32px 20px;
+  }
+
+  .kategori-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .kategori-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .kategori-card .cat-title {
+    font-size: 16px;
+  }
+
+  .kategori-card .cat-desc {
+    font-size: 12px;
+  }
+}
+
+/* ── PRODUK GRID ──────────────────────────── */
+@media (max-width: 768px) {
+  .produk-section {
+    padding: 32px 20px;
+  }
+
+  /* Grid 2 kolom di HP */
+  .produk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .produk-card {
+    border-radius: 14px;
+  }
+
+  .produk-card img {
+    height: 130px;
+    object-fit: cover;
+  }
+
+  .produk-card .prod-name {
+    font-size: 13px;
+  }
+
+  .produk-card .prod-price {
+    font-size: 13px;
+  }
+
+  /* Sembunyikan rating di HP kalau terlalu sempit */
+  .produk-card .prod-stars {
+    font-size: 11px;
+  }
+
+  .produk-card .btn-cart {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+/* ── REVIEW SECTION ───────────────────────── */
+@media (max-width: 768px) {
+  .review-section {
+    padding: 32px 20px;
+  }
+
+  .review-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .review-card {
+    padding: 18px;
+  }
+
+  .review-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+/* ── FOOTER ───────────────────────────────── */
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 32px 20px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1; /* Span full width */
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    max-width: 280px;
+  }
+}
+
+/* ── BOTTOM NAVIGATION BAR ────────────────── */
+/* Tambahkan bottom nav khusus HP */
+@media (max-width: 768px) {
+  .bottom-nav-mobile {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    border-top: 1px solid #222;
+    padding: 10px 0 14px;
+    z-index: 1000;
+  }
+
+  .bottom-nav-mobile .bnav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: #555;
+    text-decoration: none;
+    font-size: 10px;
+  }
+
+  .bottom-nav-mobile .bnav-item.active {
+    color: #C9A84C;
+  }
+
+  .bottom-nav-mobile .bnav-item svg,
+  .bottom-nav-mobile .bnav-item i {
+    font-size: 22px;
+  }
+
+  /* Tambah padding bawah agar konten tidak ketutup bottom nav */
+  main, .page-content {
+    padding-bottom: 70px;
+  }
+}
+
+/* Sembunyikan bottom nav di desktop */
+.bottom-nav-mobile {
+  display: none;
+}
+
+/* ── LOGIN & REGISTER PAGE ────────────────── */
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .auth-left-panel {
+    display: none; /* Sembunyikan panel kiri di HP */
+  }
+
+  .auth-right-panel {
+    width: 100%;
+    padding: 32px 20px;
+    border-radius: 0;
+  }
+
+  .auth-right-panel h1 {
+    font-size: 26px;
+  }
+
+  .auth-right-panel input {
+    font-size: 16px; /* Mencegah zoom otomatis di iOS */
+  }
+
+  .auth-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+/* ── UTILITAS UMUM ────────────────────────── */
+@media (max-width: 768px) {
+  /* Heading lebih kecil */
+  h1 { font-size: clamp(28px, 8vw, 48px); }
+  h2 { font-size: clamp(22px, 6vw, 36px); }
+
+  /* Padding section lebih kecil */
+  section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Container full width */
+  .container {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  /* Sembunyikan elemen yang tidak perlu di HP */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Tampilkan elemen khusus HP */
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+/* Default: sembunyikan mobile-only di desktop */
+.mobile-only {
+  display: none;
+}

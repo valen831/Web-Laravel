@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
@@ -32,3 +33,15 @@ Route::delete('/keranjang', [ShoeController::class, 'cartClear'])->name('cart.cl
 Route::get('/checkout', [ShoeController::class, 'checkout'])->name('checkout');
 Route::post('/checkout', [ShoeController::class, 'checkoutProcess'])->name('checkout.process');
 Route::get('/checkout/nota', [ShoeController::class, 'orderReceipt'])->name('checkout.receipt');
+
+// Admin
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('/login',  [AdminController::class, 'showLogin'])->name('login');
+        Route::post('/login', [AdminController::class, 'login'])->name('login.post');
+    });
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    });
+});

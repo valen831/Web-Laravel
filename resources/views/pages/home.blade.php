@@ -6,7 +6,7 @@
 <section class="hero">
     <div class="hero-bg-text">SHOES</div>
     <div class="hero-content">
-        <div class="hero-tag">✦ New Collection 2025</div>
+        <div class="hero-tag">✦ New Collection 2026</div>
         <h1 class="hero-title">Langkah Terbaik<br><span class="hero-accent">Dimulai Dari Sini</span></h1>
         <p class="hero-sub">Koleksi sepatu lokal & internasional terbaik. Dari sneakers kasual hingga running shoes premium.</p>
         <div class="hero-cta">
