@@ -401,13 +401,21 @@
             <div class="auth-divider">atau</div>
 
             <a href="{{ route('register') }}" class="btn-auth-outline">Buat Akun Baru</a>
-
-            <div class="register-prompt">
+<div class="register-prompt">
                 Belum punya akun?
                 <a href="{{ route('register') }}">Daftar di sini</a>
             </div>
-        </div>
 
-    </div>
+            {{-- TAMBAHKAN DI SINI --}}
+            <div style="text-align:center; margin-top: 16px;">
+                <a href="{{ route('admin.login') }}" 
+                   style="font-size: 12px; color: #3a3428; text-decoration: none; transition: color 0.2s;"
+                   onmouseover="this.style.color='#d4a843'" 
+                   onmouseout="this.style.color='#3a3428'">
+                    🔐 Login sebagai Admin
+                </a>
+            </div>
+
+        </div>
+    </div> 
 </div>
-@endsection

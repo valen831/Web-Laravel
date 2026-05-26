@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 class ShoeController extends Controller
 {
-    private function getProducts()
+    public function getProducts()
     {
         return [
             // LOKAL
@@ -393,6 +395,31 @@ class ShoeController extends Controller
             'total'   => $subtotal,
             'items'   => $cart,
         ];
+
+        // Simpan ke Database untuk Admin Panel
+        $dbOrder = Order::create([
+            'id'      => $order['id'],
+            'nama'    => $order['nama'],
+            'hp'      => $order['hp'],
+            'alamat'  => $order['alamat'],
+            'kota'    => $order['kota'],
+            'payment' => $order['payment'],
+            'total'   => $order['total'],
+            'status'  => 'Pending',
+        ]);
+
+        foreach ($cart as $item) {
+            OrderItem::create([
+                'order_id'   => $dbOrder->id,
+                'product_id' => $item['id'],
+                'brand'      => $item['brand'],
+                'name'       => $item['name'],
+                'price'      => $item['price'],
+                'size'       => $item['size'],
+                'qty'        => $item['qty'],
+                'image'      => $item['image'],
+            ]);
+        }
 
         session()->forget('cart');
         session(['last_order' => $order]);

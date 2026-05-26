@@ -36,12 +36,16 @@ Route::get('/checkout/nota', [ShoeController::class, 'orderReceipt'])->name('che
 
 // Admin
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('guest:admin')->group(function () {
-        Route::get('/login',  [AdminController::class, 'showLogin'])->name('login');
-        Route::post('/login', [AdminController::class, 'login'])->name('login.post');
-    });
+    Route::get('/login',  [AdminController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminController::class, 'login'])->name('login.post');
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/produk', [AdminController::class, 'produk'])->name('produk');
+        Route::get('/pesanan', [AdminController::class, 'pesanan'])->name('pesanan');
+        Route::post('/pesanan/{id}/status', [AdminController::class, 'updateOrderStatus'])->name('pesanan.status');
+        Route::delete('/pesanan/{id}', [AdminController::class, 'deleteOrder'])->name('pesanan.delete');
+        Route::get('/pelanggan', [AdminController::class, 'pelanggan'])->name('pelanggan');
+        Route::get('/brand', [AdminController::class, 'brand'])->name('brand');
     });
 });
