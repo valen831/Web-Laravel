@@ -7,6 +7,11 @@
     <p>{{ count($cart) }} item dalam keranjang</p>
 </section>
 
+@php
+    $ongkir = $subtotal >= 500000 ? 0 : 25000;
+    $total  = $subtotal + $ongkir;
+@endphp
+
 <div class="cart-page">
     @if(empty($cart))
     <div class="cart-empty">
@@ -88,12 +93,21 @@
                 </div>
                 <div class="summary-row">
                     <span>Ongkos Kirim</span>
-                    <span style="color:var(--green)">Gratis</span>
+                    @if($ongkir === 0)
+                        <span style="color:var(--green)">Gratis ✓</span>
+                    @else
+                        <div style="text-align:right;">
+                            <span style="color:var(--red)">Rp {{ number_format($ongkir, 0, ',', '.') }}</span>
+                            <div style="font-size:0.75rem; color:#888; margin-top:2px;">
+                                Tambah Rp {{ number_format(500000 - $subtotal, 0, ',', '.') }} lagi untuk gratis ongkir
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="summary-divider"></div>
                 <div class="summary-row summary-total">
                     <span><strong>Total</strong></span>
-                    <span><strong>Rp {{ number_format($subtotal, 0, ',', '.') }}</strong></span>
+                    <span><strong>Rp {{ number_format($total, 0, ',', '.') }}</strong></span>
                 </div>
             </div>
             <a href="{{ route('checkout') }}" class="btn-checkout">Lanjut ke Pembayaran →</a>
