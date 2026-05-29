@@ -7,6 +7,11 @@
     <p>Lengkapi data untuk menyelesaikan pesanan</p>
 </section>
 
+@php
+    $ongkir = $subtotal >= 500000 ? 0 : 25000;
+    $total  = $subtotal + $ongkir;
+@endphp
+
 <style>
 .payment-detail-box {
     display: none;
@@ -117,11 +122,22 @@
 .payment-card input[type="radio"]:checked ~ .pay-info strong {
     color: #d4a843;
 }
+
+/* Ongkir info */
+.ongkir-info {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 2px;
+    text-align: right;
+}
 </style>
 
 <div class="checkout-page">
     <form action="{{ route('checkout.process') }}" method="POST" id="checkoutForm">
         @csrf
+        <input type="hidden" name="ongkir" value="{{ $ongkir }}">
+        <input type="hidden" name="total" value="{{ $total }}">
+
         <div class="checkout-layout">
             <!-- KIRI: FORM -->
             <div class="checkout-left">
@@ -183,16 +199,13 @@
                         <div class="payment-detail-box {{ old('payment')=='qris' ? 'active' : '' }}" id="detail-qris">
                             <div class="qris-wrap">
                                 <div class="qris-img-box">
-                                    <!-- QRIS SVG Pattern -->
                                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                        <!-- Corner squares -->
                                         <rect x="5" y="5" width="25" height="25" fill="none" stroke="#000" stroke-width="3"/>
                                         <rect x="9" y="9" width="17" height="17" fill="#000"/>
                                         <rect x="70" y="5" width="25" height="25" fill="none" stroke="#000" stroke-width="3"/>
                                         <rect x="74" y="9" width="17" height="17" fill="#000"/>
                                         <rect x="5" y="70" width="25" height="25" fill="none" stroke="#000" stroke-width="3"/>
                                         <rect x="9" y="74" width="17" height="17" fill="#000"/>
-                                        <!-- Data dots -->
                                         <rect x="35" y="5" width="5" height="5" fill="#000"/>
                                         <rect x="45" y="5" width="5" height="5" fill="#000"/>
                                         <rect x="55" y="5" width="5" height="5" fill="#000"/>
@@ -231,7 +244,6 @@
                                         <rect x="20" y="55" width="5" height="5" fill="#000"/>
                                         <rect x="10" y="60" width="5" height="5" fill="#000"/>
                                         <rect x="25" y="65" width="5" height="5" fill="#000"/>
-                                        <!-- Center logo area -->
                                         <rect x="42" y="42" width="16" height="16" rx="3" fill="#d4a843"/>
                                         <text x="50" y="53" text-anchor="middle" font-size="8" font-weight="bold" fill="#111" font-family="Arial">VS</text>
                                     </svg>
@@ -383,7 +395,7 @@
                                 </div>
                                 <div class="cod-step">
                                     <div class="cod-step-num">3</div>
-                                    <p>Siapkan uang <strong style="color:#d4a843;">Rp {{ number_format($subtotal, 0, ',', '.') }}</strong> (pas) saat barang tiba.</p>
+                                    <p>Siapkan uang <strong style="color:#d4a843;">Rp {{ number_format($total, 0, ',', '.') }}</strong> (pas) saat barang tiba.</p>
                                 </div>
                                 <div class="cod-warning">
                                     ⚠️ Pastikan Anda berada di alamat pengiriman saat paket tiba. COD hanya tersedia untuk wilayah Jawa & Bali.
@@ -423,14 +435,26 @@
                                 <span>Subtotal</span>
                                 <span>Rp {{ number_format($subtotal, 0, ',', '.') }}</span>
                             </div>
+
+                            {{-- Ongkos Kirim --}}
                             <div class="summary-row">
                                 <span>Ongkos Kirim</span>
-                                <span style="color:var(--green)">Gratis ✓</span>
+                                @if($ongkir === 0)
+                                    <span style="color:var(--green)">Gratis ✓</span>
+                                @else
+                                    <div style="text-align:right;">
+                                        <span style="color:var(--red)">Rp {{ number_format($ongkir, 0, ',', '.') }}</span>
+                                        <div class="ongkir-info">
+                                            Tambah Rp {{ number_format(500000 - $subtotal, 0, ',', '.') }} lagi untuk gratis ongkir
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
+
                             <div class="summary-divider"></div>
                             <div class="summary-row summary-total">
                                 <span><strong>Total</strong></span>
-                                <span><strong>Rp {{ number_format($subtotal, 0, ',', '.') }}</strong></span>
+                                <span><strong>Rp {{ number_format($total, 0, ',', '.') }}</strong></span>
                             </div>
                         </div>
                     </div>
@@ -469,7 +493,6 @@ function copyText(text, elId) {
     });
 }
 
-// Init on load
 document.addEventListener('DOMContentLoaded', () => {
     const checked = document.querySelector('input[name="payment"]:checked');
     if (checked) showDetail(checked.value);
