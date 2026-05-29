@@ -44,22 +44,22 @@
 ## 📸 Screenshots
 
 ### 🏠 Halaman Utama (Hero Section)
-![Hero Section](public/images/screenshots/01_hero.png)
+![Hero Section](public/images/products/01_hero.png)
 
 ### 🗂️ Kategori Produk
-![Kategori](public/images/screenshots/02_kategori.png)
+![Kategori](public/images/products/02_kategori.png)
 
 ### 🛍️ Produk Pilihan
-![Produk](public/images/screenshots/03_produk.png)
+![Produk](public/images/products/03_produk.png)
 
 ### ⭐ Ulasan Pelanggan & Footer
-![Review](public/images/screenshots/04_review.png)
+![Review](public/images/products/04_review.png)
 
 ### 🔐 Halaman Login
-![Login](public/images/screenshots/05_login.png)
+![Login](public/images/products/05_login.png)
 
 ### 📝 Halaman Registrasi
-![Register](public/images/screenshots/06_register.png)
+![Register](public/images/products/06_register.png)
 
 > **Cara menambahkan screenshot:**
 > Simpan file gambar di `public/images/screenshots/` dengan nama sesuai di atas, lalu push ke GitHub agar tampil otomatis.
